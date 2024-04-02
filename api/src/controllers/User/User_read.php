@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $user_item = array(
                 "UserID" => $UserID,
                 "Email" => $Email,
+                "FirstName" => $FirstName,
+                "LastName" => $LastName,
                 // Vous pouvez inclure d'autres champs ici
             );
 

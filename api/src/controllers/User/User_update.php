@@ -12,10 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    if (!empty($data->UserID) && (!empty($data->Email) || !empty($data->Password))) {
+    if (!empty($data->UserID) && (!empty($data->Email) || !empty($data->Password)|| !empty($data->FirstName)|| !empty($data->LastName))) {
         $user->UserID = $data->UserID;
         $user->Email = !empty($data->Email) ? $data->Email : null;
         $user->Password = !empty($data->Password) ? password_hash($data->Password, PASSWORD_DEFAULT) : null;
+        $user->FirstName = !empty($data->FirstName) ? $data->FirstName : null;
+        $user->LastName = !empty($data->LastName) ? $data->LastName : null;
 
         if ($user->update()) {
             http_response_code(200);

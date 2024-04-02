@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $user_arr = array(
                 "UserID" => $user->UserID,
                 "Email" => $user->Email,
+                "FirstName" => $FirstName,
+                "LastName" => $LastName,
                 "Password" => $user->Password
             );
 

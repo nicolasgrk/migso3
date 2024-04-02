@@ -4,13 +4,9 @@ class Database{
     private $host = "localhost";
     private $db_name = "migso";
     private $username = "root";
-    private $password = "root";
+    private $password = "";
     public $connexion;
-    // private $host = "localhost";
-    // private $db_name = "migso";
-    // private $username = "root";
-    // private $password = "";
-    // public $connexion;
+
     // getter pour la connexion
     public function getConnection(){
         // On commence par fermer la connexion si elle existait

@@ -1,7 +1,5 @@
 <?php
-// En-tête requis pour la prise en charge de CORS et le type de contenu JSON
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+
 
 // Inclure les fichiers de configuration et de modèle nécessaires
 include_once '../../config/config.php';
@@ -9,7 +7,9 @@ include_once '../../models/User.php'; // Assurez-vous que le chemin est correct
 
 // Vérification de la méthode de la requête
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+    
     // Instanciation de la base de données et de l'utilisateur
     $database = new Database();
     $db = $database->getConnection();
@@ -19,12 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
 
     // Vérification des données requises
-    if (!empty($data->Email) && !empty($data->Password)) {
+    if (!empty($data->Email) && !empty($data->Password) && !empty($data->FirstName) && !empty($data->LastName)) {
 
         // Association des données à l'objet utilisateur
         $user->Email = $data->Email;
         // Ici, vous devez hasher le mot de passe avant de le stocker
         $user->Password = password_hash($data->Password, PASSWORD_DEFAULT);
+        $user->FirstName = $data->FirstName;
+        $user->LastName = $data->LastName;
 
         // Tentative de création de l'utilisateur
         if ($user->create()) {
